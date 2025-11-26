@@ -46,20 +46,6 @@ Catatan: jika PowerShell menolak menjalankan skrip aktivasi, jalankan `Set-Execu
 - `events.json` dan `users.json` menyimpan data lokal — perhatikan jangan commit data sensitif ke repo publik.
 - Direktori `static/uploads/` berisi file yang diupload; tambahkan ke `.gitignore` agar tidak ikut ter-commit.
 
-## Menyiapkan repository GitHub (contoh)
-1. Inisialisasi repo lokal dan commit:
-```powershell
-git init
-git add .
-git commit -m "Initial commit — open-source demo e-voting"
-```
-2. Buat repository di GitHub lalu sambungkan remote (ganti URL):
-```powershell
-git branch -M main
-git remote add origin https://github.com/<username>/<repo>.git
-git push -u origin main
-```
-
 ## Lisensi & kontribusi
 - **Lisensi**: Proyek ini dilisensikan di bawah **MIT License**. Lihat file `LICENSE` untuk detail lengkap.
 - **Kontribusi**: Kami menerima kontribusi dengan senang hati! Cara berkontribusi:
