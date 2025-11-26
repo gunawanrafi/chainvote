@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Blockchain - {{ event.name }}</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url_for('index') }}">E-Voting Blockchain</a>
+        <span class="navbar-text text-light me-auto ms-3">
+          Blockchain: {{ event.name }}
+        </span>
+        <div class="d-flex ms-auto align-items-center">
+          {% if user %}
+          <span class="navbar-text text-light me-3">
+            {{ user.username }} ({{ user.role }})
+          </span>
+          <a href="{{ url_for('logout') }}" class="btn btn-sm btn-outline-light">Logout</a>
+          {% else %}
+          <a href="{{ url_for('login') }}" class="btn btn-sm btn-outline-light">Login</a>
+          {% endif %}
+          <button id="themeToggle" type="button" class="btn btn-sm btn-outline-light ms-2">
+            <span id="themeLabel">Light</span> Mode
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+          <h2 class="mb-1">Blockchain Event</h2>
+          <p class="text-muted mb-0">
+            ID: {{ event.event_id }} | Dibuat: {{ event.created_at }}
+          </p>
+          {% if user and user.role == 'attacker' %}
+          <p class="text-danger small mb-0 mt-1">
+            Anda login sebagai <strong>attacker</strong>. Anda dapat mencoba memodifikasi blok untuk melihat efek pada
+            integritas blockchain.
+          </p>
+          {% endif %}
+        </div>
+        <div class="text-end">
+          {% if is_valid %}
+          <span class="badge bg-success fs-6">CHAIN VALID</span>
+          {% else %}
+          <span class="badge bg-danger fs-6">INVALID CHAIN</span>
+          <p class="text-danger mt-2 mb-0 fw-bold">
+            Rantai blockchain telah dimodifikasi / rusak!
+          </p>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if not is_valid %}
+      <div class="alert alert-danger">
+        <strong>Peringatan:</strong> Integritas blockchain tidak valid. Data mungkin telah diubah.
+      </div>
+      {% endif %}
+
+      <div class="row">
+        <div class="col-lg-5 mb-3">
+          <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+              <h6 class="mb-0">Ringkasan Hasil Voting</h6>
+            </div>
+            <div class="card-body small">
+              {% if summary.total > 0 %}
+              <p class="mb-2">
+                <strong>Total Suara Masuk:</strong> {{ summary.total }}
+              </p>
+              <ul class="list-unstyled mb-2">
+                {% for cand, count in summary.counts.items() %}
+                <li class="mb-1">
+                  <strong>{{ cand }}:</strong> {{ count }} suara
+                  {% if summary.total > 0 %}
+                  <span class="text-muted">({{ '%.1f' % ((count / summary.total) * 100) }}%)</span>
+                  {% endif %}
+                </li>
+                {% endfor %}
+              </ul>
+              {% if summary.winners %}
+              <p class="mb-0">
+                <strong>Pemenang:</strong>
+                {% for w in summary.winners %}
+                <span class="badge bg-success">{{ w }}</span>
+                {% endfor %}
+              </p>
+              {% else %}
+              <p class="mb-0 text-muted">Belum ada pemenang (belum ada suara).</p>
+              {% endif %}
+              {% else %}
+              <p class="mb-0 text-muted">Belum ada suara yang masuk untuk event ini.</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-7 mb-3">
+          <div class="card shadow-sm">
+            <div class="card-header bg-secondary text-white d-flex justify-content-between align-items-center">
+              <span>Ekspor Data</span>
+              <a
+                href="{{ url_for('export_blockchain_csv', event_id=event.event_id) }}"
+                class="btn btn-sm btn-light"
+              >
+                Download CSV (Excel)
+              </a>
+            </div>
+            <div class="card-body small">
+              <p class="mb-1">
+                File CSV ini berisi seluruh blok voting (tanpa genesis) termasuk:
+                <code>index</code>, <code>timestamp</code>, <code>voter_id</code>, <code>candidate</code>,
+                <code>previous_hash</code>, dan <code>hash</code>.
+              </p>
+              <p class="mb-0 text-muted">
+                Bisa dibuka langsung di Excel / Google Sheets untuk analisis lanjutan atau dokumentasi hasil pemilu.
+              </p>
+              {% if user and user.role == 'admin' %}
+              <hr />
+              <a
+                href="{{ url_for('manage_candidates', event_id=event.event_id) }}"
+                class="btn btn-sm btn-primary mt-1"
+              >
+                Kelola Kandidat (Admin)
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-2">
+        {% for block in chain %}
+        <div class="col-md-6 col-lg-4 mb-3">
+          <div class="card h-100 shadow-sm block-card">
+            <div class="card-header {% if block.index == 0 %}bg-secondary{% else %}bg-primary{% endif %} text-white">
+              <div class="d-flex justify-content-between align-items-center">
+                <span>Block #{{ block.index }}</span>
+                {% if block.index == 0 %}
+                <span class="badge bg-light text-dark">GENESIS</span>
+                {% endif %}
+              </div>
+            </div>
+            <div class="card-body small">
+              <p class="mb-1">
+                <strong>Timestamp:</strong><br />
+                <code>{{ block.timestamp }}</code>
+              </p>
+              <p class="mb-1">
+                <strong>Voter ID:</strong><br />
+                <code>{{ block.voter_id }}</code>
+              </p>
+              <p class="mb-1">
+                <strong>Kandidat:</strong><br />
+                <code>{{ block.candidate }}</code>
+              </p>
+              <p class="mb-1">
+                <strong>Previous Hash:</strong><br />
+                <code class="text-wrap d-block">{{ block.previous_hash }}</code>
+              </p>
+              <p class="mb-0">
+                <strong>Hash:</strong><br />
+                <code class="text-wrap d-block">{{ block.hash }}</code>
+              </p>
+              {% if user and user.role == 'attacker' and block.index != 0 %}
+              <hr />
+              <a
+                href="{{ url_for('tamper_block', event_id=event.event_id, block_index=block.index) }}"
+                class="btn btn-sm btn-outline-danger w-100"
+              >
+                Modifikasi Blok Ini (Attacker)
+              </a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+
+        {% if not chain %}
+        <p class="text-muted">Belum ada blok pada blockchain ini.</p>
+        {% endif %}
+      </div>
+
+      <div class="mt-3">
+        <a href="{{ url_for('event_page', event_id=event.event_id) }}" class="btn btn-outline-primary">
+          Kembali ke Halaman Voting
+        </a>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      (function () {
+        function applyStoredTheme() {
+          const stored = localStorage.getItem("theme") || "dark";
+          if (stored === "light") {
+            document.body.classList.add("light-mode");
+          } else {
+            document.body.classList.remove("light-mode");
+          }
+        }
+        function updateLabel() {
+          const isLight = document.body.classList.contains("light-mode");
+          const label = document.getElementById("themeLabel");
+          if (label) {
+            label.textContent = isLight ? "Dark" : "Light";
+          }
+        }
+        applyStoredTheme();
+        document.addEventListener("DOMContentLoaded", function () {
+          updateLabel();
+          const btn = document.getElementById("themeToggle");
+          if (!btn) return;
+          btn.addEventListener("click", function () {
+            document.body.classList.toggle("light-mode");
+            const isLight = document.body.classList.contains("light-mode");
+            localStorage.setItem("theme", isLight ? "light" : "dark");
+            updateLabel();
+          });
+        });
+      })();
+    </script>
+  </body>
+  </html>
+
+

@@ -1,0 +1,45 @@
+## Multi-Event Blockchain E-Voting (Flask)
+
+Proyek demo e-voting sederhana dengan banyak event, tiap event memiliki blockchain sendiri yang disimpan di file JSON (`events.json`).
+
+### Teknologi
+- Python 3 + Flask
+- SHA-256 (`hashlib`)
+- Penyimpanan `events.json`
+- HTML/CSS + Bootstrap 5
+
+### Struktur Folder
+- `app.py` — Aplikasi Flask utama dan logika blockchain.
+- `templates/`
+  - `index.html` — List dan pembuatan event.
+  - `event.html` — Halaman voting.
+  - `blockchain.html` — Viewer blockchain per event.
+- `static/`
+  - `style.css` — Styling tambahan.
+- `events.json` — Penyimpanan semua event dan blockchain.
+
+### Cara Menjalankan
+1. Buat dan aktifkan virtualenv (opsional tapi disarankan).
+2. Install dependency:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Jalankan aplikasi:
+   ```bash
+   python app.py
+   ```
+4. Buka browser ke `http://127.0.0.1:5000`.
+
+### Alur Penggunaan
+1. Di halaman utama:
+   - Lihat daftar event.
+   - Buat event baru dengan nama dan daftar kandidat (dipisah koma).
+   - Saat event dibuat, otomatis dibuat 1 genesis block.
+2. Klik tombol **Vote** pada event:
+   - Pilih kandidat, submit → akan menambahkan block baru ke blockchain event tersebut.
+3. Klik **Lihat Blockchain**:
+   - Menampilkan seluruh block (genesis + vote).
+   - Sistem mengecek integritas blockchain (hash & previous_hash).
+   - Jika ada manipulasi data, label akan berubah menjadi **INVALID CHAIN**.
+
+

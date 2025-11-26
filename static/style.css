@@ -1,0 +1,215 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: radial-gradient(circle at top left, #4f46e5 0, #1e293b 35%, #020617 100%);
+  color: #e5e7eb;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #0f172a, #111827);
+  box-shadow: 0 0.4rem 1.2rem rgba(15, 23, 42, 0.6);
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-text {
+  color: #e5e7eb !important;
+}
+
+.navbar .btn-outline-light {
+  border-radius: 999px;
+}
+
+.container {
+  max-width: 1140px;
+  padding-bottom: 2rem;
+}
+
+/* Kartu utama / panel */
+.card {
+  border-radius: 0.9rem;
+  border: none;
+  background: rgba(248, 250, 252, 0.97);
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.card-header {
+  border-top-left-radius: 0.9rem !important;
+  border-top-right-radius: 0.9rem !important;
+}
+
+.list-group-item {
+  border: none;
+  border-radius: 0.75rem;
+  margin-bottom: 0.6rem;
+  background: #f9fafb;
+  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.45);
+}
+
+.list-group-item:hover {
+  transform: translateY(-2px);
+  transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 12px 28px rgba(148, 163, 184, 0.6);
+}
+
+/* Tombol utama */
+.btn-success,
+.btn-primary,
+.btn-dark {
+  border-radius: 999px;
+  padding-inline: 1.2rem;
+  box-shadow: 0 10px 25px rgba(34, 197, 94, 0.4);
+}
+
+.btn-success:hover,
+.btn-primary:hover,
+.btn-dark:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 32px rgba(22, 163, 74, 0.55);
+}
+
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-outline-danger {
+  border-radius: 999px;
+}
+
+/* Kartu kandidat */
+.candidate-card {
+  background: linear-gradient(145deg, #eff6ff, #f9fafb);
+  border: 1px solid #dbeafe;
+}
+
+.candidate-card:hover {
+  transform: translateY(-4px);
+  transition: transform 0.18s ease-in-out, box-shadow 0.18s ease-in-out;
+  box-shadow: 0 16px 40px rgba(129, 140, 248, 0.55);
+}
+
+/* Blockchain block card */
+.block-card {
+  border: 1px solid #e5e7eb;
+}
+
+.block-card code {
+  font-size: 0.75rem;
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: #0b1120;
+  color: #e5e7eb;
+  padding: 0.18rem 0.35rem;
+  border-radius: 0.35rem;
+}
+
+.badge.fs-6 {
+  font-size: 0.9rem;
+}
+
+/* Halaman auth (login / register) */
+body.d-flex.align-items-center {
+  background: radial-gradient(circle at top, #4f46e5 0, #020617 60%);
+}
+
+.card-header.bg-dark,
+.card-header.bg-primary {
+  background-image: linear-gradient(120deg, #4f46e5, #06b6d4);
+}
+
+.alert {
+  border-radius: 0.75rem;
+  border: none;
+  box-shadow: 0 10px 30px rgba(148, 163, 184, 0.55);
+}
+
+/* Kecilkan sedikit font sub info */
+.form-text,
+.small {
+  color: #6b7280 !important;
+}
+
+/* Heading warna kontras di dark mode */
+h1,
+h2,
+h3,
+h4 {
+  color: #f9fafb;
+}
+
+/* LIGHT MODE OVERRIDES */
+body.light-mode {
+  background: #f3f4f6;
+  color: #0f172a;
+}
+
+body.light-mode .navbar,
+body.light-mode .navbar.bg-dark {
+  background: #ffffff !important;
+  background-image: none !important;
+  box-shadow: 0 0.4rem 1.1rem rgba(148, 163, 184, 0.45);
+}
+
+body.light-mode .navbar-dark .navbar-brand,
+body.light-mode .navbar-dark .navbar-text,
+body.light-mode .navbar-dark .nav-link {
+  color: #0f172a !important;
+}
+
+body.light-mode .navbar .btn-outline-light {
+  color: #334155;
+  border-color: #cbd5f5;
+}
+
+body.light-mode .navbar .btn-outline-light:hover {
+  background-color: #e5e7eb;
+}
+
+body.light-mode .card {
+  background: #ffffff;
+  box-shadow: 0 14px 32px rgba(148, 163, 184, 0.55);
+}
+
+body.light-mode .list-group-item {
+  background: #f9fafb;
+  box-shadow: 0 8px 20px rgba(148, 163, 184, 0.5);
+}
+
+body.light-mode .candidate-card {
+  background: linear-gradient(145deg, #ffffff, #f9fafb);
+  border-color: #e5e7eb;
+}
+
+body.light-mode .block-card code {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+body.light-mode .badge.fs-6 {
+  background-color: #16a34a !important;
+}
+
+body.light-mode .alert {
+  box-shadow: 0 8px 24px rgba(148, 163, 184, 0.5);
+}
+
+body.light-mode h1,
+body.light-mode h2,
+body.light-mode h3,
+body.light-mode h4 {
+  color: #0f172a;
+}
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1rem;
+  }
+
+  .card {
+    box-shadow: 0 14px 35px rgba(15, 23, 42, 0.4);
+  }
+}
