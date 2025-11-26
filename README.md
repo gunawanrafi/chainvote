@@ -61,8 +61,13 @@ git push -u origin main
 ```
 
 ## Lisensi & kontribusi
-- Untuk menjadikan proyek ini open-source, tambahkan file `LICENSE` (mis. MIT). Jika mau, saya bisa menambahkan `LICENSE` otomatis.
-- Kontribusi: buat issue atau PR; sertakan deskripsi perubahan dan langkah untuk mereproduksi.
+- **Lisensi**: Proyek ini dilisensikan di bawah **MIT License**. Lihat file `LICENSE` untuk detail lengkap.
+- **Kontribusi**: Kami menerima kontribusi dengan senang hati! Cara berkontribusi:
+  1. Fork repository ini
+  2. Buat branch fitur (`git checkout -b feature/AmazingFeature`)
+  3. Commit perubahan Anda (`git commit -m 'Add some AmazingFeature'`)
+  4. Push ke branch (`git push origin feature/AmazingFeature`)
+  5. Buat Pull Request dengan deskripsi lengkap tentang perubahan Anda
 
 ## Catatan pengembang
 - Contoh ini bertujuan untuk edukasi/demo — jangan gunakan sistem ini untuk pemungutan suara nyata tanpa audit keamanan, enkripsi, dan validasi hukum.
