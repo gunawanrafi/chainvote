@@ -1,61 +1,70 @@
-# Multi-Event Blockchain E-Voting (Flask)
+# ChainVote — Multi-Event Blockchain E-Voting (Flask)
 
-Demo aplikasi e-voting berbasis Flask yang mendemonstrasikan konsep blockchain sederhana per-event. Setiap event menyimpan rantai blok (blockchain) di file JSON (`events.json`), sehingga tiap vote direkam sebagai block baru.
+ChainVote is a simple demo e-voting application built with Flask to demonstrate per-event blockchain concepts. Each event stores its own chain of blocks in a JSON file (`events.json`), and each vote is recorded as a new block.
 
-**Fitur utama**
-- Simpan banyak event — setiap event punya blockchain sendiri
-- Tambah kandidat dan buat event dari UI
-- Lakukan voting; setiap vote menjadi satu block yang ditambahkan
-- Viewer blockchain per event + pemeriksaan integritas (hash & previous_hash)
+Key features
+- Multiple events: each event has its own blockchain
+- Create events and add candidates from the UI
+- Cast votes — every vote becomes a block appended to the event chain
+- Blockchain viewer per event with integrity checks (hash & previous_hash)
 
-**Teknologi**
+Technology
 - Python 3
 - Flask (web framework)
-- `hashlib` (SHA-256) untuk hashing block
-- HTML/CSS (+Bootstrap) untuk tampilan
+- `hashlib` (SHA-256) for block hashing
+- HTML/CSS (+Bootstrap) for UI
 
-**Struktur proyek (singkat)**
-- `app.py` — Aplikasi Flask & logika blockchain
-- `templates/` — HTML templates untuk UI
-- `static/` — CSS dan aset statis (`style.css`, `uploads/`)
-- `events.json` — Penyimpanan data event & blockchain
-- `users.json` — (opsional) data pengguna bila ada
+Project structure (short)
+- `app.py` — Flask application and blockchain logic
+- `templates/` — HTML templates for UI
+- `static/` — CSS and static assets (`style.css`, `uploads/`)
+- `events.json` — Storage for events and their blockchains
+- `users.json` — (optional) user data if present
 
-## Quickstart (Windows PowerShell)
-1. (Opsional) Buat virtual environment dan aktifkan:
+Quickstart (Windows PowerShell)
+1. (Optional) Create and activate a virtual environment:
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 ```
-2. Install dependency:
+2. Install dependencies:
 ```powershell
 pip install -r requirements.txt
 ```
-3. Jalankan aplikasi:
+3. Run the app:
 ```powershell
 python app.py
 ```
-4. Buka browser ke `http://127.0.0.1:5000`
+4. Open your browser at `http://127.0.0.1:5000`
 
-Catatan: jika PowerShell menolak menjalankan skrip aktivasi, jalankan `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` lalu aktifkan kembali.
+Note: If PowerShell blocks activation scripts, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
 
-## Menjalankan untuk development
-- Edit `app.py` atau template di `templates/` lalu refresh browser.
+Development
+- Modify `app.py` or templates in `templates/` and refresh the browser to see changes.
 
-## File data & keamanan
-- `events.json` dan `users.json` menyimpan data lokal — perhatikan jangan commit data sensitif ke repo publik.
-- Direktori `static/uploads/` berisi file yang diupload; tambahkan ke `.gitignore` agar tidak ikut ter-commit.
+Data files & security
+- `events.json` and `users.json` contain local data — do not commit any sensitive data to a public repository.
+- `static/uploads/` contains user uploads; it is excluded via `.gitignore` to avoid committing uploaded files.
 
-## Lisensi & kontribusi
-- **Lisensi**: Proyek ini dilisensikan di bawah **MIT License**. Lihat file `LICENSE` untuk detail lengkap.
-- **Kontribusi**: Kami menerima kontribusi dengan senang hati! Cara berkontribusi:
-  1. Fork repository ini
-  2. Buat branch fitur (`git checkout -b feature/AmazingFeature`)
-  3. Commit perubahan Anda (`git commit -m 'Add some AmazingFeature'`)
-  4. Push ke branch (`git push origin feature/AmazingFeature`)
-  5. Buat Pull Request dengan deskripsi lengkap tentang perubahan Anda
+Publishing to GitHub (example)
+1. Initialize local repo and commit:
+```powershell
+git init
+git add .
+git commit -m "Initial commit — ChainVote demo"
+```
+2. Create a repository on GitHub, then add remote and push (replace the URL):
+```powershell
+git branch -M main
+git remote add origin https://github.com/<username>/<repo>.git
+git push -u origin main
+```
 
-## Catatan pengembang
-- Contoh ini bertujuan untuk edukasi/demo — jangan gunakan sistem ini untuk pemungutan suara nyata tanpa audit keamanan, enkripsi, dan validasi hukum.
+License & contribution
+- License: This project is released under the MIT License — see the `LICENSE` file for details.
+- Contribution guide: Fork the repo, create a feature branch, commit changes, push the branch, and open a Pull Request with a clear description of your changes.
 
-Terima kasih sudah menggunakan proyek ini!
+Developer notes
+- This project is an educational demo. Do not use this system for real-world elections without a proper security audit, real cryptographic protections, and legal review.
+
+Thank you for trying ChainVote!
