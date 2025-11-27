@@ -49,19 +49,6 @@ Data files & security
 - `events.json` and `users.json` contain local data — do not commit any sensitive data to a public repository.
 - `static/uploads/` contains user uploads; it is excluded via `.gitignore` to avoid committing uploaded files.
 
-Publishing to GitHub (example)
-1. Initialize local repo and commit:
-```powershell
-git init
-git add .
-git commit -m "Initial commit — ChainVote demo"
-```
-2. Create a repository on GitHub, then add remote and push (replace the URL):
-```powershell
-git branch -M main
-git remote add origin https://github.com/<username>/<repo>.git
-git push -u origin main
-```
 
 License & contribution
 - License: This project is released under the MIT License — see the `LICENSE` file for details.
