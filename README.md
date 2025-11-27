@@ -3,6 +3,7 @@
 ChainVote is a simple demo e-voting application built with Flask to demonstrate per-event blockchain concepts. Each event stores its own chain of blocks in a JSON file (`events.json`), and each vote is recorded as a new block.
 
 <img width="1231" height="560" alt="image" src="https://github.com/user-attachments/assets/546aa6f9-cebf-4586-8663-2fbb3945ade2" />
+<img width="1265" height="797" alt="image" src="https://github.com/user-attachments/assets/52f8b80b-3eda-4a52-8256-24b53182db8c" />
 
 
 Key features
