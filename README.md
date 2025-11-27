@@ -1,4 +1,4 @@
-# ChainVote — Multi-Event Blockchain E-Voting (Flask)
+# ChainVote — Multi-Event Blockchain E-Voting 
 
 ChainVote is a simple demo e-voting application built with Flask to demonstrate per-event blockchain concepts. Each event stores its own chain of blocks in a JSON file (`events.json`), and each vote is recorded as a new block.
 
