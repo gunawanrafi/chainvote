@@ -43,6 +43,24 @@ python app.py
 
 Note: If PowerShell blocks activation scripts, run `Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass` first.
 
+Start with Linux:
+1. (Optional) Create and activate a virtual environment:
+```powershell
+python3 -m venv .venv
+source .venv/bin/activate
+```
+2. Install dependencies:
+```powershell
+pip install -r requirements.txt
+```
+3. Run the app:
+```powershell
+python app.py
+```
+4. Open your browser at `http://127.0.0.1:5000`
+
+
+
 Development
 - Modify `app.py` or templates in `templates/` and refresh the browser to see changes.
 
